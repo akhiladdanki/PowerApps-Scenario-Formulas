@@ -1,0 +1,19 @@
+I've a dropdown named "testDateField" and a label named "testLabel".
+
+In the dropdown, I've data as month/year. For example: 01/2019 02/2019 03/2019 04/2019 05/2019 06/2019 07/2019 08/2019 ... ...
+
+Now, in the testLabel; I want to use the below formula:
+
+Date(Right(testdatefield.SelectedText.Value, 4), Left(testdatefield.SelectedText.Value, 2), 1)
+
+With this formula, I can get the first day of the month which is selected from the dropdown.
+
+Ideally, I should get 08/01/2019 on selecting 08/2019 from the dropdown. Example-2: On selecting 01/2019 from the dropdown, I should get 01/01/2019 in the label.
+
+
+
+--------------------------------------------Formula---------------------------------------------
+Date(
+    Value(Right(Dropdown1.SelectedText.Value, 4)),
+    Value(Left(Dropdown1.SelectedText.Value, 2)),
+    1)
