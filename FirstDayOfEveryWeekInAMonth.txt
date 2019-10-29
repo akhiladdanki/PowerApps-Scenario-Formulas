@@ -1,0 +1,60 @@
+I've a table with two columns: 1. Month 2. Week
+
+Data in table is as follows:
+
+Month | Week
+
+1 | 4
+
+2 | 3
+
+3 | 2
+
+4 | 1
+
+5 | 4
+
+6 | 3
+
+7 | 2
+
+8 | 1
+
+9 | 4
+
+10 | 3
+
+11 | 2
+
+12 | 1
+
+Now, based on the date which user provides I need to find the corresponding first day of the week based on the mapping in the table above.
+
+Example-1:
+
+Date from user: 9/29/2019
+
+Now, I will see the month in the date provided by the user and then based on that month; I'll look into the table and see the corresponding week for that month. Here, for month 9(September) the corresponding week will be week 4. Now, since I've the week for that month; I need to find the first date of that week in that month of the year. In this case, it'll be 9/23/2019.
+
+My solution should be 9/23/2019.
+
+Example-2:
+
+Date from user: 10/10/2019
+
+Now, I will see the month in the date provided by the user and then based on that month; I'll look into the table and see the corresponding week for that month. Here, for month 10(October) the corresponding week will be week 3. Now, since I've the week for that month; I need to find the first date of that week in that month of the year. In this case, it'll be 10/21/2019.
+
+My solution should be 10/21/2019.
+
+
+
+------------------------------------------Formula-----------------------------------------------
+
+With(
+    { firstDay: Date(Year(DatePicker1.SelectedDate), Month(DatePicker1.SelectedDate), 1) },
+    With(
+        {
+            firstMonday: DateAdd(firstDay, 7 - Weekday(firstDay, StartOfWeek.Tuesday), Days),
+            weekNumber: LookUp(MyTable, Month = Month(DatePicker1.SelectedDate), Week)
+        },
+        DateAdd(firstMonday, 7 * (weekNumber - 1), Days)))
